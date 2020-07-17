@@ -1,3 +1,5 @@
+using System;
+
 namespace CadastroRepository.Models
 {
     public class PessoaEntity
