@@ -15,4 +15,12 @@ export class PessoasService {
   getPessoas(ativo: boolean, nome: string): Observable<PessoaModel[]> {
     return this.http.get<PessoaModel[]>(this.baseUrl + 'api/pessoas?ativo=' + ativo + "&nome=" + nome);
   }
+
+  getPessoa(id: string): Observable<PessoaModel> {
+    return this.http.get<PessoaModel>(this.baseUrl + 'api/pessoas/' + id);
+  }
+
+  postPessoa(pessoa: PessoaModel): Observable<PessoaModel> {
+    return this.http.post<PessoaModel>(this.baseUrl + 'api/pessoas', pessoa);
+  }
 }

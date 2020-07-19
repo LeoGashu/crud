@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <form [formGroup]="pessoaForm" (ngSubmit)="onSubmit(pessoaForm.value)">
+    <input type="hidden" class="form-control" formControlName="id" />
+    <div class="form-group">
+      <label for="lblEmail">Email</label>
+      <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Insira o email">
+    </div>
+    <div class="form-group">
+      <label for="lblNome">Nome</label>
+      <input type="text" class="form-control" formControlName="nome" placeholder="Insira o nome completo">
+    </div>
+    <div class="form-group">
+      <label for="lblEndereco">Endereço</label>
+      <input type="text" class="form-control" formControlName="endereco" placeholder="Insira o endereço">
+    </div>
+    <div class="form-group">
+      <label for="lblCpf">CPF</label>
+      <input type="text" class="form-control" formControlName="cpf" placeholder="Insira o CPF válido">
+    </div>
+    <div class="form-group">
+      <label for="lblTelefone">Telefone</label>
+      <input type="text" class="form-control" formControlName="telefone" placeholder="Telefone">
+    </div>
+    <div class="form-group">
+      <label for="lblAtivo">Ativo</label>
+      <input type="checkbox" class="form-control" formControlName="ativo">
+    </div>
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+  </form>
+</div>
+

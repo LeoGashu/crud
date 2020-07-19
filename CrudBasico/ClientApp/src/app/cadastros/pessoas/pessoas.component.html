@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <h1>Pessoas</h1>
   <button class="btn btn-primary my-3">Novo</button>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let pessoa of pessoaLst">
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" *ngFor="let pessoa of pessoaLst" [routerLink]="['/pessoa/' + pessoa.id]">
       {{pessoa.nome}}
-    </li>
-  </ul>
+    </a>
+  </div>
 </div>

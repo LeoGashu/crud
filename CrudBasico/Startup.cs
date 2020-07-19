@@ -1,3 +1,5 @@
+using CadastroRepository.Interfaces;
+using CadastroRepository.Mock;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,9 @@ namespace CrudBasico
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //Serviços
+            services.AddSingleton<IPessoaRepository>(new PessoaRepositoryMock());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
