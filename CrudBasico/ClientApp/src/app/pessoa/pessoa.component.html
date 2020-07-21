@@ -38,7 +38,7 @@
       <input type="text" class="form-control" formControlName="telefone" placeholder="Telefone - Somente números">
     </div>
     <button type="submit" class="btn btn-primary mr-3" [disabled]="!pessoaForm.valid">{{(id == null || isGuidEmpty(id) ? "Adicionar" : "Atualizar")}}</button>
-    <button type="button" class="btn btn-danger mr-3r" [hidden]="(id == null || isGuidEmpty(id))" (click)="open(content)">Apagar</button>
+    <button type="button" class="btn btn-danger mr-3" [hidden]="(id == null || isGuidEmpty(id))" (click)="open(content)">Apagar</button>
     <button type="button" class="btn btn-warning mr-3" (click)="voltar()">Voltar</button>
   </form>
 </div>
