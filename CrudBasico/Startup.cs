@@ -1,12 +1,17 @@
 using CadastroRepository.Interfaces;
 using CadastroRepository.Mock;
+using CadastroRepository.Sqlite;
+using CadastroRepository.TypeHandlers;
+using Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace CrudBasico
 {
@@ -29,8 +34,23 @@ namespace CrudBasico
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            var dbType = Configuration.GetSection("DBType").Get<string>();
             //Serviços
-            services.AddSingleton<IPessoaRepository>(new PessoaRepositoryMock());
+            switch (dbType)
+            {
+                case "Sqlite":
+                    var connection = Configuration["ConnectionStrings:SqliteConnectionString"];
+
+                    services.AddSingleton<IPessoaRepository>(new PessoaRepository(connection));
+                    SqlMapper.AddTypeHandler(new SqliteGuidTypeHandler());
+                    SqlMapper.RemoveTypeMap(typeof(Guid));
+                    SqlMapper.RemoveTypeMap(typeof(Guid?));
+                    break;
+                case "Mock":
+                default:
+                    services.AddSingleton<IPessoaRepository>(new PessoaRepositoryMock());
+                    break;
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
