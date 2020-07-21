@@ -2,6 +2,7 @@
 Desenvolvido com .NET Core 3.1 e Angular 8
 
 # Instruções de build e execução
+Navegar para o diretório CrudBasico e executar os seguintes comandos
     dotnet build
     
     dotnet run
