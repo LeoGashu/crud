@@ -46,7 +46,7 @@ export class PessoaComponent implements OnInit {
 
   onSubmit(pessoaForm: PessoaModel) {
     this.pessoasService.postPessoa(pessoaForm).subscribe(result => {
-      this.location.back();
+      this.voltar();
     }, error => {
       console.error(error);
     });
@@ -64,10 +64,14 @@ export class PessoaComponent implements OnInit {
     });
   }
 
+  voltar() {
+    this.location.back();
+  }
+
   deletarPessoa() {
     this.pessoasService.deletePessoa(this.id).subscribe(result => {
       if (result > 0) {
-        this.location.back();
+        this.voltar();
       }
     }, error => {
       console.error(error);
