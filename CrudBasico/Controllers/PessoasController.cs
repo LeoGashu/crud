@@ -41,21 +41,23 @@ namespace CrudBasico.Controllers
         [HttpPost]
         public async Task<PessoaViewModel> Post([FromBody] PessoaViewModel pessoaViewModel)
         {
-            await pessoaRepository.UpdatePessoaAsync(pessoaViewModel);
+            if (pessoaViewModel.Id != Guid.Empty)
+            {
+                await pessoaRepository.UpdatePessoaAsync(pessoaViewModel);
+            }
+            else {
+                pessoaViewModel.Id = Guid.NewGuid();
+                await pessoaRepository.InsertPessoaAsync(new List<PessoaViewModel>() { pessoaViewModel });
+            }
 
             return await Get(pessoaViewModel.Id);
         }
 
-        // PUT api/<PessoasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         // DELETE api/<PessoasController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<int> Delete(Guid id)
         {
+            return await pessoaRepository.DeletePessoaAsync(id);
         }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 
 namespace CadastroRepository.Mock
@@ -87,6 +88,23 @@ namespace CadastroRepository.Mock
             pessoaEntities.RemoveAll(_ => _.Id == pessoaEntity.Id);
 
             pessoaEntities.Add(pessoaEntity);
+        }
+
+        public async Task<int> DeletePessoaAsync(Guid id)
+        {
+            var pessoas = pessoaEntities.Where(_ => _.Id == id);
+            int count = 0;
+
+            if (pessoas != null && pessoas.Count() > 0)
+            {
+                foreach(var pessoa in pessoas)
+                {
+                    count++;
+                    pessoa.Ativo = false;
+                }
+            }
+
+            return count;
         }
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }

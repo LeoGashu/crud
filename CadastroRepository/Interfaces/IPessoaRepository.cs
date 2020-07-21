@@ -12,5 +12,6 @@ namespace CadastroRepository.Interfaces
         Task<PessoaEntity> GetPessoaByIdAsync(Guid id);
         Task InsertPessoaAsync(IEnumerable<PessoaEntity> pessoaEntity);
         Task UpdatePessoaAsync(PessoaEntity pessoaEntity);
+        Task<int> DeletePessoaAsync(Guid id);
     }
 }

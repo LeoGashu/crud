@@ -17,6 +17,11 @@ namespace CadastroRepository.Repositories
 
         }
 
+        public async Task<int> DeletePessoaAsync(Guid id)
+        {
+            return await dbConnection.ExecuteAsync("UPDATE Pessoa SET Ativo = 0 WHERE Id = @Id", new { Id = id });
+        }
+
         public async Task<PessoaEntity> GetPessoaByIdAsync(Guid id)
         {
             return await dbConnection.QueryFirstOrDefaultAsync<PessoaEntity>($"{this.BaseQuery} WHERE Id = @Id", new { Id = id });

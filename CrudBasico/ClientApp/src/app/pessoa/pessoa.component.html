@@ -1,3 +1,19 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Exclusão de registro</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Confirma exclusão de registro?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(true); deletarPessoa()">Sim</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">Não</button>
+  </div>
+</ng-template>
+
 <div class="container-fluid">
   <form [formGroup]="pessoaForm" (ngSubmit)="onSubmit(pessoaForm.value)">
     <input type="hidden" class="form-control" formControlName="id" />
@@ -11,21 +27,22 @@
     </div>
     <div class="form-group">
       <label for="lblEndereco">Endereço</label>
-      <input type="text" class="form-control" formControlName="endereco" placeholder="Insira o endereço">
+      <input type="text" class="form-control" formControlName="endereco" placeholder="Insira um endereço">
     </div>
     <div class="form-group">
       <label for="lblCpf">CPF</label>
-      <input type="text" class="form-control" formControlName="cpf" placeholder="Insira o CPF válido">
+      <input type="text" class="form-control" formControlName="cpf" appOnlyNumbers placeholder="Insira um CPF válido - Somente números">
     </div>
     <div class="form-group">
       <label for="lblTelefone">Telefone</label>
-      <input type="text" class="form-control" formControlName="telefone" placeholder="Telefone">
+      <input type="text" class="form-control" formControlName="telefone" placeholder="Telefone - Somente números">
     </div>
-    <div class="form-group">
-      <label for="lblAtivo">Ativo</label>
-      <input type="checkbox" class="form-control" formControlName="ativo">
+    <div class="form-check mb-4">
+      <input type="checkbox" class="form-check-input" formControlName="ativo">
+      <label for="lblAtivo" class="form-check-label">Ativo</label>
     </div>
-    <button type="submit" class="btn btn-primary">Atualizar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!pessoaForm.valid">{{(id == null || isGuidEmpty(id) ? "Adicionar" : "Atualizar")}}</button>
+    <button type="button" class="btn btn-danger" [hidden]="(id == null || isGuidEmpty(id))" (click)="open(content)">Apagar</button>
   </form>
 </div>
 

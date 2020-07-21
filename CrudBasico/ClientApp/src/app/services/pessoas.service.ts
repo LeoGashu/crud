@@ -23,4 +23,8 @@ export class PessoasService {
   postPessoa(pessoa: PessoaModel): Observable<PessoaModel> {
     return this.http.post<PessoaModel>(this.baseUrl + 'api/pessoas', pessoa);
   }
+
+  deletePessoa(id: string): Observable<number> {
+    return this.http.delete<number>(this.baseUrl + 'api/pessoas/' + id);
+  }
 }

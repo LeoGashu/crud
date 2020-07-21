@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h1>Pessoas</h1>
-  <button class="btn btn-primary my-3">Novo</button>
+  <button class="btn btn-primary my-3" [routerLink]="['/pessoa/']">Novo</button>
   <div class="list-group">
     <a class="list-group-item list-group-item-action" *ngFor="let pessoa of pessoaLst" [routerLink]="['/pessoa/' + pessoa.id]">
       {{pessoa.nome}}
