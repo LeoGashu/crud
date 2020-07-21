@@ -1,5 +1,6 @@
 using CadastroRepository.Interfaces;
 using CadastroRepository.Mock;
+using CadastroRepository.Mongo;
 using CadastroRepository.Sqlite;
 using CadastroRepository.TypeHandlers;
 using Dapper;
@@ -38,6 +39,13 @@ namespace CrudBasico
             //Serviços
             switch (dbType)
             {
+                case "Mongo":
+                    string mongoConnectionString = Configuration["ConnectionStrings:MongoDBConnectionString:ConnectionString"];
+                    string mongoDatabaseName = Configuration["ConnectionStrings:MongoDBConnectionString:DatabaseName"];
+                    string mongoCollectionName = Configuration["ConnectionStrings:MongoDBConnectionString:CollectionName"];
+
+                    services.AddSingleton<IPessoaRepository>(new PessoasMongoRepository(mongoConnectionString, mongoDatabaseName, mongoCollectionName));
+                    break;
                 case "Sqlite":
                     var connection = Configuration["ConnectionStrings:SqliteConnectionString"];
 
